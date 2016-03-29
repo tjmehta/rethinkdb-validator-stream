@@ -41,22 +41,18 @@
     "shimmer": "^1.1.0",
     "sinon": "^1.17.3"
   },
+  "peerDependencies": {
+    "rethinkdb": "^2.2.2"
+  },
   "dependencies": {
     "101": "^1.5.0",
     "assert-args": "^1.1.0",
     "ast-to-reql": "^0.5.0",
     "buffer-splice": "^1.0.0",
     "chalk": "^1.1.3",
-    "concat-stream": "^1.5.1",
-    "construct": "^1.0.0",
     "debug": "^2.2.0",
-    "deep-equal": "^1.0.1",
-    "is-promise": "^2.1.0",
-    "object-loops": "^0.7.0",
-    "propagate": "^0.4.0",
     "pumpify": "^1.3.4",
     "rethinkdb-stream-chunker": "^0.5.0",
-    "rethinkdb-websocket-server": "^0.4.1",
     "through2": "^2.0.1",
     "validate-reql": "^0.1.2"
   }
