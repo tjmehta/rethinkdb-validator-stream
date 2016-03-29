@@ -2,7 +2,6 @@ var DuplexStream = require('stream').Duplex
 var util = require('util')
 
 var noop = require('101/noop')
-var propagate = require('propagate')
 var through2 = require('through2')
 
 module.exports = MockSocket
