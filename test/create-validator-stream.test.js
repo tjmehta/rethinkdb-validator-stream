@@ -1,3 +1,4 @@
+if (typeof Promise === 'undefined') require('es6-promise').polyfill()
 // var createResponseChunker = require('rethinkdb-stream-chunker').createResponseStreamChunker
 var expect = require('chai').expect
 var pick = require('101/pick')
