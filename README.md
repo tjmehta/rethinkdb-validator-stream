@@ -1,4 +1,4 @@
-# rethinkdb-validator-stream
+# rethinkdb-validator-stream [![Build Status](https://travis-ci.org/tjmehta/rethinkdb-validator-stream.svg)](https://travis-ci.org/tjmehta/rethinkdb-validator-stream) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 Validate rethinkdb queries streaming to the socket
 
 # Installation
@@ -17,7 +17,7 @@ var replyStream = ... // outgoing reply stream
 var opts = {
   db: 'database', // optional, specify database requirement for all queries
   whitelist: [
-    // reql query or reql validator,
+    // exact reql query or reql validator,
     // see `http://github.com/tjmehta/validate-reql` for examples
   ]
 }
