@@ -25,6 +25,12 @@ var validatorStream = createValidatorStream(opts)
 
 // incoming pipeline
 astStream.pipe(validatorStream).pipe(socket)
+// handle validation errors
+validatorStream.on('error', function (err) {
+  // handle err
+  // if you want to send a rethinkdb ClientError to the reply stream,
+  // checkout https://github.com/tjmehta/rethinkdb-stream-chunker (responseStream.insertClientError)
+})
 // outgoign pipeline
 socket.pipe(replyStream)
 ```
