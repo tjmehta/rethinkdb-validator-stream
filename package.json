@@ -1,6 +1,6 @@
 {
   "name": "rethinkdb-validator-stream",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "description": "Validate rethinkdb queries streaming to the socket ",
   "main": "index.js",
   "directories": {
