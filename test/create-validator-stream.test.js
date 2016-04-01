@@ -100,9 +100,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
+        handshakeComplete: true,
         db: this.db
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('data', function (queryBuf) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('data', function (queryBuf) {
         try {
           var queryParts = pick(parseQueryBuffer(queryBuf), ['type', 'term', 'opts'])
           expect(queryParts).to.deep.equal({
@@ -126,7 +127,8 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        db: this.db
+        db: this.db,
+        handshakeComplete: true
       }
       // create a "CONTINUE" query
       // note: this is probably not a valid "continue" query...
@@ -135,7 +137,7 @@ describe('create-validator-stream tests', function () {
       ast[0] = 2 // CONTINUE
       continueBuf.write(JSON.stringify(ast), 12)
       this.socket.writeStream.write(continueBuf)
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('data', function (queryBuf) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('data', function (queryBuf) {
         try {
           var queryParts = pick(parseQueryBuffer(queryBuf), ['type', 'term', 'opts'])
           expect(queryParts).to.deep.equal({
@@ -188,9 +190,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        db: 'unexpected-db' // mismatch!
+        db: 'unexpected-db', // mismatch!
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('error', function (err) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (err) {
         try {
           expect(err).to.be.an.instanceOf(ValidationError)
           expect(err.message).to.equal('"opts" mismatch')
@@ -229,9 +232,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        db: this.db
+        db: this.db,
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('error', function (err) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (err) {
         expect(err).to.be.an.instanceOf(Error)
         expect(err.message).to.equal('Invalid query ast')
         done()
@@ -247,9 +251,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        db: this.db
+        db: this.db,
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('error', function (err) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (err) {
         expect(err).to.be.an.instanceOf(Error)
         expect(err.message).to.equal('Unknown query type')
         done()
@@ -267,9 +272,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        db: this.db
+        db: this.db,
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('error', function (err) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (err) {
         expect(err).to.be.an.instanceOf(Error)
         expect(err.message).to.match(/term/)
         done()
@@ -307,9 +313,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        log: true
+        log: true,
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('data', function (queryBuf) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('data', function (queryBuf) {
         try {
           sinon.assert.calledOnce(console.log)
           sinon.assert.calledWith(console.log, sinon.match(/ALLOW/))
@@ -327,9 +334,10 @@ describe('create-validator-stream tests', function () {
         whitelist: [
           r.table('test-table').get('hey')
         ],
-        log: true
+        log: true,
+        handshakeComplete: true
       }
-      this.socket.writeStream.pipe(createValidator(opts, true)).on('error', function (queryBuf) {
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (queryBuf) {
         try {
           sinon.assert.calledOnce(console.log)
           sinon.assert.calledWith(console.log, sinon.match(/DENY/))

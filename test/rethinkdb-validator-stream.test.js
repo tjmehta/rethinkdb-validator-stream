@@ -31,9 +31,10 @@ describe('rethinkdb-validator-stream tests', function () {
     var opts = {
       whitelist: [
         r.table('test-table').get('hey')
-      ]
+      ],
+      handshakeComplete: true
     }
-    this.socket.writeStream.pipe(createValidator(opts, true)).on('data', function (queryBuf) {
+    this.socket.writeStream.pipe(createValidator(opts)).on('data', function (queryBuf) {
       try {
         var queryParts = pick(parseQueryBuffer(queryBuf), ['type', 'term', 'opts'])
         expect(queryParts).to.deep.equal({
@@ -55,10 +56,11 @@ describe('rethinkdb-validator-stream tests', function () {
     var opts = {
       whitelist: [
         r.table('NONONON').get('hey')
-      ]
+      ],
+      handshakeComplete: true
     }
     var buffer = new Buffer(0)
-    var validator = createValidator(opts, true)
+    var validator = createValidator(opts)
     this.socket.writeStream.pipe(validator).on('data', function (queryBuf) {
       buffer = Buffer.concat([buffer, queryBuf])
     })
