@@ -55,7 +55,9 @@ describe('create-validator-stream tests', function () {
       var query = r.table('test-table').get('hey')
       var opts = {
         whitelist: [
-          r.table('test-table').get('hey')
+          r.table('test-table').get('hey'),
+          r.table('test-table').get('hello-world'), // for maxChunkLen coverage
+          r.table('test-table').get('a') // for maxChunkLen coverage
         ],
         db: this.db
       }
@@ -285,6 +287,30 @@ describe('create-validator-stream tests', function () {
       ast[1][0] = -1 // unknown term type
       invalidBuf.write(JSON.stringify(ast), 12)
       this.socket.writeStream.write(invalidBuf)
+    })
+
+    it('should error if queries is larger than max len', function (done) {
+      var opts = {
+        whitelist: [
+          r.table('test-table').get('hey'),
+          r.table('test-table').get('hello-world'), // for maxChunkLen coverage
+          r.table('test-table').get('a') // for maxChunkLen coverage
+        ],
+        log: true,
+        handshakeComplete: true
+      }
+      var query = r.table(new Array(1000).join('A')).get('hey')
+      this.socket.writeStream.pipe(createValidator(opts)).on('error', function (err) {
+        try {
+          expect(err).to.exist
+          console.log(err.message)
+          expect(err.message).to.match(/length/)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      })
+      query.run(this.connection, function () {})
     })
   })
 
