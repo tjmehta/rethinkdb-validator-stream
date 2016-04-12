@@ -3,7 +3,6 @@ require('./fixtures/load-env.js')
 
 var net = require('net')
 
-var createCount = require('callback-count')
 var expect = require('chai').expect
 var pick = require('101/pick')
 var r = require('rethinkdb')
