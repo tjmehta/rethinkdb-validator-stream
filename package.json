@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/tjmehta/rethinkdb-validator-stream",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.2",
     "es6-promise": "^4.0.5",
     "istanbul": "^0.4.2",
     "mocha": "^3.2.0",
