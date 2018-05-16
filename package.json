@@ -52,7 +52,7 @@
     "buffer-splice": "^1.0.0",
     "chalk": "^1.1.3",
     "debug": "^2.2.0",
-    "pumpify": "^1.3.4",
+    "pumpify": "^1.5.1",
     "rethinkdb-stream-chunker": "^0.7.0",
     "through2": "^2.0.1",
     "validate-reql": "^0.2.1"
