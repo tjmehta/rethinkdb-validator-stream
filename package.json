@@ -40,7 +40,7 @@
     "mocha": "^3.2.0",
     "rethinkdb": "^2.3.0",
     "shimmer": "^1.1.0",
-    "sinon": "^2.0.0"
+    "sinon": "^7.4.0"
   },
   "peerDependencies": {
     "rethinkdb": "^2.2.2"
