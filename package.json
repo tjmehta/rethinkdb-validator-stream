@@ -38,7 +38,7 @@
     "es6-promise": "^4.0.5",
     "istanbul": "^0.4.2",
     "mocha": "^3.2.0",
-    "rethinkdb": "^2.3.0",
+    "rethinkdb": "^2.4.1",
     "shimmer": "^1.1.0",
     "sinon": "^2.0.0"
   },
